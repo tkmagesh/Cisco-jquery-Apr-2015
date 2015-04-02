@@ -31,7 +31,27 @@
     }
     $.fn.highlight = function(){
         $(this).addClass("highlight");
-    }
+    };
+        
+    //$(document).ready(init);
+    //$(init)
+    $(function init(){
+        $("#btnSave").click(function(){
+          console.log("save button clicked");
+        });
+        $(".error").hide();
+        $(":text").blur(function(){
+            var $this = $(this);
+            if ($this.val() === ""){
+                $this.next(".error").show();
+                $this.addClass("highlight");
+            } else {
+                $this.next(".error").hide();
+                $this.removeClass("highlight");
+            }
+        });
+    });
+    
     </script>
 </head>
 <body>
@@ -40,14 +60,17 @@
             <div class="field">
                 <label for="">First Name :</label>
                 <input type="text" name="" id="txtFirstName" class="nameBox">
+                <span class="error">First name is mandatory</span>
             </div>
             <div class="field">
                 <label for="">Last Name :</label>
                 <input type="text" name="" id="txtLastName" class="nameBox">
+                <span class="error">Last name is mandatory</span>
             </div>
             <div class="field">
                 <label for="">Age :</label>
                 <input type="text" id="txtAge" class="numberBox"></input>
+                <span class="error">Age is mandatory</span>
             </div>
             <div class="field">
                 <input type="button" value="Save" id="btnSave">
