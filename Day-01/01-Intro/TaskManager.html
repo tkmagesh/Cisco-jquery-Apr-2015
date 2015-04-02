@@ -39,11 +39,17 @@
 
         $("li").click(onTaskItemClick);
         $("#btnAddTask").click(function(){
-            var newTaskName = $("#txtTask").val();
-            var $newTask = $("<li>");
-            $newTask.html(newTaskName);
-            $newTask.click(onTaskItemClick);
-            $("#olTaskList").append($newTask);
+            $("<li>")
+                .html($("#txtTask").val())
+                .click(onTaskItemClick)
+                .hide()
+                .prependTo("#olTaskList")
+                .slideDown();
+        });
+        $("#btnRemoveCompleted").click(function(){
+            $("#olTaskList > li.completed").fadeOut(function(){
+                $(this).remove();
+            });
         });
     });
     </script>
