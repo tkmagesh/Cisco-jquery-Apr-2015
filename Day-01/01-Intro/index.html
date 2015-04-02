@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+    .content{
+        border : 2px solid black;
+        border-radius: 10px;
+        padding: 10px;
+        background-color: lightgrey;
+    }
+    label{
+        display : block;
+    }
+    .field{
+        margin-bottom: 5px;
+    }
+    #divMessage{
+        font-size: 20pt;
+    }
+    </style>
+</head>
+<body>
+    <div class="content">
+       <form action="">
+            <div class="field">
+                <label for="">First Name :</label>
+                <input type="text" name="" id="txtFirstName" class="nameBox">
+            </div>
+            <div class="field">
+                <label for="">Last Name :</label>
+                <input type="text" name="" id="txtLastName" class="nameBox">
+            </div>
+            <div class="field">
+                <label for="">Age :</label>
+                <input type="text" id="txtAge" class="numberBox"></input>
+            </div>
+            <div class="field">
+                <input type="button" value="Save" id="btnSave">
+                <input type="reset" value="Clear" id="btnReset"></div>
+            <div>
+                <div id="divMessage">[Message]</div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
