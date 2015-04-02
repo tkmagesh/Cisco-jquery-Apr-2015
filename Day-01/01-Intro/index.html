@@ -19,7 +19,20 @@
     #divMessage{
         font-size: 20pt;
     }
+    .highlight{
+        border : 2px solid red;
+        background: lightpink;
+    }
     </style>
+    <script src="jquery-1.11.2.js"></script>
+    <script>
+    function clear(){
+        $("*").removeClass("highlight");
+    }
+    $.fn.highlight = function(){
+        $(this).addClass("highlight");
+    }
+    </script>
 </head>
 <body>
     <div class="content">
