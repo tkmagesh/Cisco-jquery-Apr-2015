@@ -21,6 +21,16 @@
         padding: 5px;
         cursor: pointer;
     }
+    #divMessage{
+        position: absolute;
+        right: 0px;
+        bottom: 0px;
+        margin: 5px;
+        padding: 10px;
+        border: 2px solid black;
+        background-color: lightgray;
+        border-radius: 5px;
+    }
     </style>
     <!--
     Use Cases
@@ -45,12 +55,22 @@
                 .hide()
                 .prependTo("#olTaskList")
                 .slideDown();
+            displayMessage("A new task is added");
         });
         $("#btnRemoveCompleted").click(function(){
             $("#olTaskList > li.completed").fadeOut(function(){
                 $(this).remove();
             });
+            displayMessage("Zero or more completed tasks are removed");
         });
+        function displayMessage(msg){
+            $("#divMessage")
+                .html(msg)
+                .hide()
+                .slideDown(500)
+                .delay(3000)
+                .slideUp(500);
+        }
     });
     </script>
 </head>
@@ -71,7 +91,7 @@
             <li class="completed">Task - 2</li>
             <li>Task - 3</li>
         </ol>
-        <div id="divMessage"></div>
+        <div id="divMessage">[Messages will be displayed here]</div>
     </div>
 </body>
 </html>
