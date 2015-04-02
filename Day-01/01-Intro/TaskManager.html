@@ -31,7 +31,22 @@
     4. Display a message whenever a task is added or removed
      -->
     <script src="jquery-1.11.2.js"></script>
-    
+    <script>
+    $(function(){
+        function onTaskItemClick(){
+            $(this).toggleClass("completed");
+        }
+
+        $("li").click(onTaskItemClick);
+        $("#btnAddTask").click(function(){
+            var newTaskName = $("#txtTask").val();
+            var $newTask = $("<li>");
+            $newTask.html(newTaskName);
+            $newTask.click(onTaskItemClick);
+            $("#olTaskList").append($newTask);
+        });
+    });
+    </script>
 </head>
 <body>
     <h1>Task Manager</h1>
