@@ -1,0 +1,34 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "name": "Watch a movie",
+      "isCompleted": false
+    },
+    {
+      "id": 2,
+      "name": "Learn jQuery",
+      "isCompleted": true
+    },
+    {
+      "id": 3,
+      "name": "Explore HTML5",
+      "isCompleted": false
+    },
+    {
+      "id": 4,
+      "name": "Master JavaScript",
+      "isCompleted": true
+    },
+    {
+      "name": "Arrange the Cab for airport",
+      "isCompleted": false,
+      "id": 5
+    },
+    {
+      "name": "Watch jQuery Videos",
+      "isCompleted": false,
+      "id": 6
+    }
+  ]
+}

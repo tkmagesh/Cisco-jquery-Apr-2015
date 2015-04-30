@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Manager</title>
+    <style>
+    .completed{
+        color : red;
+        text-decoration: line-through;
+        font-style: italic;
+        border-color : red;
+    }
+    ol{
+        width: 50%;
+    }
+    li{
+        list-style: none;
+        margin: 5px;
+        border : 2px solid gray;
+        background-color: #e7e7e7;
+        padding: 5px;
+        cursor: pointer;
+    }
+    #divMessages{
+        position: absolute;
+        right: 0px;
+        bottom: 0px;
+        margin: 5px;
+        padding: 10px;
+    }
+    .divMessage{
+        border: 2px solid black;
+        background-color: lightgray;
+        border-radius: 5px;
+        margin: 5px;
+        padding: 10px;
+    }
+    .classGroup{
+        margin: 10px;
+        width: 50%;
+    }
+    </style>
+   
+    <!--
+    Use Cases
+    =========
+    1. Add a new task
+    2. Toggle the tasks as completed
+    3. Remove completed tasks
+    4. Display a message whenever a task is added or removed
+
+    5. Categorize the tasks
+    6. Display the tasks in groups based on categories
+    7. Show hide the group
+    8. Filter the tasks
+    9. Persist them in window.localStorage and load them during page load
+    10. Give the user a way by which he can add a new category
+
+     -->
+    <script src="jquery-1.11.2.js"></script>
+    <script>
+    $(function(){
+        
+        $.ajax({
+            url : "http://localhost:3000/tasks",
+            method : "GET",
+            contentType : "application/json",
+            dataType : "JSON",
+            success : function(response){
+                response.forEach(addTask);
+            }
+        });
+        
+        function onTaskItemClick(){
+            $(this).toggleClass("completed");
+        }
+
+        $("#olTaskList").on("click","li", onTaskItemClick);
+        $("#btnAddTask").click(function(){
+            var taskName = $("#txtTask").val();
+            var data = {
+                name : taskName,
+                isCompleted : false
+            };
+            $.ajax({
+                url : "http://localhost:3000/tasks",
+                method : "POST",
+                dataType : "JSON",
+                contentType : "application/json",
+                data : JSON.stringify(data),
+                success : addTask
+            });
+        });
+        function addTask(task){
+            $("<li>")
+                .html(task.name)
+                .hide()
+                .addClass(task.isCompleted ? "completed" : "")
+                .attr("data-taskId", task.id)
+                .prependTo("#olTaskList")
+                .slideDown();
+            displayMessage("A new task is added");
+        }
+        $("#btnRemoveCompleted").click(function(){
+            $("#olTaskList > li.completed").fadeOut(function(){
+                $(this).remove();
+            });
+            displayMessage("Zero or more completed tasks are removed");
+        });
+        function displayMessage(msg){
+            $("<div>")
+                .addClass("divMessage")
+                .html(msg)
+                .hide()
+                .appendTo("#divMessages")
+                .slideDown(500)
+                .delay(3000)
+                .slideUp(500, function(){
+                    $(this).remove();
+                });
+        }
+    });
+    </script>
+</head>
+<body>
+    <h1>Task Manager</h1>
+    <div class="content">
+        <label for="">Task :</label>
+        <input type="text" name="" id="txtTask">
+        <select id="taskCategory">
+            <option value="Personal">Personal</option>
+            <option value="Official">Official</option>
+            <option value="Recreational">Recreational</option>
+        </select>
+        <input type="button" value="Add Task" id="btnAddTask">
+        <input type="button" value="Remove Completed" id="btnRemoveCompleted">
+        <ol id="olTaskList">
+                
+        </ol>
+        
+        
+        <div id="divMessages">
+        </div>
+    </div>
+</body>
+</html>
