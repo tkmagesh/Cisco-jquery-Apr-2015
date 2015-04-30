@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Handlebars Demo</title>
+	<style>
+		.high{
+			color : green;
+		}
+		.low{
+			color : red;
+		}
+		
+	</style>
+	<script src="handlebars-v2.0.0.js"></script>
+	<script src="jquery-1.11.2.js"></script>
+	<script>
+		var data = {
+			firstName : "Suresh",
+			lastName : "Kannan",
+			salary : 10000
+		};
+		function getPersonViewData(personData){
+			
+			return {
+				firstName : personData.firstName,
+				lastName : personData.lastName,
+				salary : personData.salary,
+				isHigh : personData.salary >= 20000
+			};
+		}
+		$(function(){
+			var template = $("#personTemplate").html();
+			var templateFn = Handlebars.compile(template);
+			$("#btnShow").click(function(){
+				var personData = getPersonViewData(data);
+				var result = templateFn(personData);
+				$("div.content").html(result);
+			});
+		});
+	</script>
+	<script type="text/template" id="personTemplate">
+		<div>
+			<div>{{firstName}}</div>
+			<div>{{lastName}}</div>
+			{{#if isHigh}}
+				<div class="high">{{salary}}</div>
+			{{else}}	
+				<div class="low">{{salary}}</div>
+			{{/if}}
+		</div>
+
+	</script>
+	
+</head>
+<body>
+	<input type="button" value="Show Data" id="btnShow">
+	<div class="content">
+	</div>
+</body>
+</html>
