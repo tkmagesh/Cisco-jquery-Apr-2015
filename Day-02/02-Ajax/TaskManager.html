@@ -102,8 +102,18 @@
             displayMessage("A new task is added");
         }
         $("#btnRemoveCompleted").click(function(){
-            $("#olTaskList > li.completed").fadeOut(function(){
-                $(this).remove();
+            $("#olTaskList > li.completed").each(function(){
+                var $this = $(this);
+                var taskId = $this.attr("data-taskId");
+                $.ajax({
+                    url : "http://localhost:3000/tasks/" + taskId,
+                    method : "DELETE",
+                    success : function(){
+                        $this.fadeOut(function(){
+                            $(this).remove();
+                        });
+                    }
+                });
             });
             displayMessage("Zero or more completed tasks are removed");
         });

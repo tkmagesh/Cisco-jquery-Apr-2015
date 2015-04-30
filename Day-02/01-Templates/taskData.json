@@ -6,19 +6,9 @@
       "isCompleted": false
     },
     {
-      "id": 2,
-      "name": "Learn jQuery",
-      "isCompleted": true
-    },
-    {
       "id": 3,
       "name": "Explore HTML5",
       "isCompleted": false
-    },
-    {
-      "id": 4,
-      "name": "Master JavaScript",
-      "isCompleted": true
     },
     {
       "name": "Arrange the Cab for airport",
